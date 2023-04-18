@@ -8,14 +8,12 @@ RUN apt update -y
 
 RUN  apt install apache2 -y
 
-RUN echo "cambios" > /var/www/html/user1.html 
+ENV contenido prueba
 
-RUN id -u luis || useradd -ms /bin/bash luis
+WORKDIR /var/www/html
 
-RUN chown luis /var/www/html -R
+RUN echo "$contenido" > /var/www/html/prueba.html
 
-USER luis
-
-RUN echo "$(whoami)" > /var/www/html/user2.html
+EXPOSE 8080
 
 CMD apachectl -DFOREGROUND
